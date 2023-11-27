@@ -113,7 +113,7 @@ const axios = require("axios");
       }
       try {
         const response = await axios.get(
-                "https://api.quiztwiz.com/api/question/quizzes",{headers}
+                "https://api.quiztwiz.com/api/question/categories",{headers}
               );
             const category = response.data.data
             if(category) {
