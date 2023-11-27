@@ -1,9 +1,10 @@
 const express = require("express");
 
-const { Questions } = require('../controller/questions.controller');
+const { Questions, LoginQuestions } = require('../controller/questions.controller');
 
 const QuesationRoutes = express.Router();
 
 QuesationRoutes.get('/questions', Questions);
+QuesationRoutes.get('/loginquestions',LoginQuestions);
 
 module.exports = QuesationRoutes;
