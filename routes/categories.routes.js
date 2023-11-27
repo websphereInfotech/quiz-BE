@@ -4,7 +4,8 @@ const {
   multipleQuestion,
   categoryQuestion,
   Categories,
-  SubCategories
+  SubCategories,
+  AllSubCategories
   // addQuestion,
   // listQuestion,
 } = require("../controller/catregories.controller");
@@ -15,6 +16,7 @@ const CategoriesRoutes = express.Router();
 // questionRoutes.get("/single",question);
 CategoriesRoutes.get('/allcategories',Categories);
 CategoriesRoutes.get('/subcategories/:id',SubCategories);
+CategoriesRoutes.get('/allsubcategories/',AllSubCategories);
 //Mutiple Category Questions
 // questionRoutes.get("/multiple",multipleQuestion);
 
