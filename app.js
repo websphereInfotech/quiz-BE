@@ -21,7 +21,7 @@ app.use("/api", userRoutes);
 
 // questions Routes
 const CategoriesRoutes = require('./routes/categories.routes');
-app.use('/api/questions', CategoriesRoutes)
+app.use('/api/category', CategoriesRoutes)
 
 //Answer Routes
 const answerRoutes = require('./routes/answer.routes');

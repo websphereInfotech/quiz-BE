@@ -3,7 +3,8 @@ const {
   question,
   multipleQuestion,
   categoryQuestion,
-  Categories
+  Categories,
+  SubCategories
   // addQuestion,
   // listQuestion,
 } = require("../controller/catregories.controller");
@@ -12,7 +13,8 @@ const { IsVerify } = require("../middlware/auth");
 const CategoriesRoutes = express.Router();
 // login Page Questions
 // questionRoutes.get("/single",question);
-CategoriesRoutes.get('/categories',Categories)
+CategoriesRoutes.get('/allcategories',Categories);
+CategoriesRoutes.get('/subcategories/:id',SubCategories);
 //Mutiple Category Questions
 // questionRoutes.get("/multiple",multipleQuestion);
 
