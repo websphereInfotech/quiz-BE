@@ -43,26 +43,27 @@ exports.Questions = async (req, res) => {
 
   try {
     const id = req.query.quiz;
-console.log('Query Parameters:', req.query);
-console.log('ID:', id);// Log the id for debugging
+// console.log('Query Parameters:', req.query);
+// console.log('ID:', id);// Log the id for debugging
 
-    const response = await axios.get(
-      `https://api.quiztwiz.com/api/question/?quiz=${quiz}`,
-      { headers }
-    );
+const response = await axios.get(
+  `https://api.quiztwiz.com/api/question/?quiz=${id}`,
+  { headers }
+);
+
 
     const questions = response.data.data;
 
-    if (questions) {
+    if (questions.length > 0) {
       res.status(200).json({
         success: true,
-        message: 'Data Successfully Retrieved',
+        message: 'Questions Data Fetch Successfully ',
         data: questions,
       });
     } else {
       res.status(404).json({
         success: false,
-        message: 'Data Not Found',
+        message: 'Questions Data Not Found',
       });
     }
   } catch (error) {

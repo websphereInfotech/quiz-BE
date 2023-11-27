@@ -119,13 +119,13 @@ const axios = require("axios");
             if(category) {
               res.status(200).json({
                   success: true,
-                  message: 'Data SuccessFully',
+                  message: 'Category Data Fetch Successfully',
                   data:category
               })
             } else {
               res.status(200).json({
                 success: false,
-                message: 'Data Not Found'
+                message: 'Category Data Not Found'
             })
             }
       } catch (error) {
@@ -148,13 +148,13 @@ const axios = require("axios");
             if(category) {
               res.status(200).json({
                   success: true,
-                  message: 'Data SuccessFully',
+                  message: 'AllSubCategory Data Fetch Successfully',
                   data:category
               })
             } else {
               res.status(200).json({
                 success: false,
-                message: 'Data Not Found'
+                message: 'AllSubCategory Data Not Found'
             })
             }
       } catch (error) {
@@ -179,16 +179,16 @@ const axios = require("axios");
 
     const category = response.data.data;
 
-    if (category) {
+    if (category.length > 0) {
       res.status(200).json({
         success: true,
-        message: 'Data Successfully Retrieved',
+        message: 'SubCategory Data Fetch Successfully',
         data: category,
       });
     } else {
       res.status(404).json({
         success: false,
-        message: 'Data Not Found',
+        message: 'SubCategory Data Not Found',
       });
     }
   } catch (error) {
