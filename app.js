@@ -21,11 +21,11 @@ app.use("/api", userRoutes);
 
 // questions Routes
 const CategoriesRoutes = require('./routes/categories.routes');
-app.use('/api/questions', CategoriesRoutes)
+app.use('/api/category', CategoriesRoutes)
 
 //Answer Routes
-const answerRoutes = require('./routes/answer.routes');
-app.use('/api/answers',answerRoutes)
+const QuesationRoutes = require('./routes/question.routes');
+app.use('/api/quesation',QuesationRoutes)
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
