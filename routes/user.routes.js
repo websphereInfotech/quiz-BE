@@ -1,5 +1,5 @@
 const express = require("express");
-const { login } = require("../controller/user.controller");
+const { login, getCoins, insertCoins } = require("../controller/user.controller");
 // const { validationConstant } = require("../constant/validate.constant");
 // const { IsVerify } = require("../middlware/auth");
 // const passport = require('passport');
@@ -11,6 +11,8 @@ const {validation}=require('../constant/validate.constant')
 
 // login user
 userRoutes.post("/login",validation('login'), login);
+userRoutes.get('/getcoins',getCoins)
+userRoutes.put('/insertconis',insertCoins)
 
 // view user
 // userRoutes.get("/view", IsVerify, userInfo);

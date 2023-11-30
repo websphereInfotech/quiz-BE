@@ -12,8 +12,7 @@ const { google } = require("googleapis");
 // );
 // const twilio = require('twilio');
 // const Nexmo = require('nexmo');
-const speakeasy = require('speakeasy');
-
+const speakeasy = require("speakeasy");
 
 // signup
 // exports.signup = async (req, res) => {
@@ -62,7 +61,7 @@ const speakeasy = require('speakeasy');
 //     });
 
 //     // const updateCoins = await User.update(
-//     //   { coins: user.coins + 100 }, 
+//     //   { coins: user.coins + 100 },
 //     //   { where: { id: user.id } }
 //     // );
 
@@ -138,7 +137,7 @@ const speakeasy = require('speakeasy');
 //       data: checkUser,
 //       token:token
 //     });
-//   } 
+//   }
 //   catch (error) {
 //     console.log(error);
 //     res.status(500).json({
@@ -147,8 +146,6 @@ const speakeasy = require('speakeasy');
 //     });
 //   }
 // };
-
-
 
 // const nexmo = new Nexmo({
 //   apiKey: '35a7d5ad',
@@ -234,15 +231,15 @@ exports.login = async (req, res) => {
     console.log("mobileNo:", mobileNumber);
 
     const existingUser = await User.findOne({
-                where: { mobileNumber },
-              });
-      
-              if (existingUser) {
-                return res.status(409).json({
-                  status: 'Fail',
-                  message: 'User with this mobile number already exists.',
-                });
-              }
+      where: { mobileNumber },
+    });
+
+    if (existingUser) {
+      return res.status(409).json({
+        status: "Fail",
+        message: "User with this mobile number already exists.",
+      });
+    }
 
     const secret = speakeasy.generateSecret({ length: 20 });
 
@@ -257,35 +254,98 @@ exports.login = async (req, res) => {
       id: usernew.id,
       mobileNumber: usernew.mobileNumber,
     };
-    
+
     const token = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: '20d',
+      expiresIn: "20d",
     });
 
     const otp = speakeasy.totp({
       secret: secret.base32,
-      encoding: 'base32',
+      encoding: "base32",
     });
 
-    console.log('Generated OTP:', otp);
+    console.log("Generated OTP:", otp);
 
     return res.status(200).json({
-      status: 'Success',
-      message: 'OTP generated and sent successfully',
+      status: "Success",
+      message: "OTP generated and sent successfully",
       data: usernew,
       otp: otp,
-      token: token
+      token: token,
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({
-      status: 'Fail',
-      message: 'Internal Server Error',
+      status: "Fail",
+      message: "Internal Server Error",
+    });
+  }
+};
+exports.getCoins = async (req, res) => {
+  try {
+    const { mobileNumber } = req.query;
+    const userData = await User.findOne({
+      where: { mobileNumber },
+      attributes: ["mobileNumber", "coins"],
+    });
+    if (userData) {
+      return res.status(200).json({
+        status: "Success",
+        message: "Coins  Fetched",
+        coins: userData.coins ? userData.coins : 0,
+      });
+    } else {
+      res.status(404).json({
+        status: "Fail",
+        message: "User Not Found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "Fail",
+      message: "Internal Server Error",
     });
   }
 };
 
+exports.insertCoins = async (req, res) => {
+  try {
+    let { mobileNumber, coins } = req.body;
+    const userData = await User.findOne({
+      where: { mobileNumber },
+    });
+    if (userData) {
+      if (userData.coins) {
+        coins = coins + userData.coins;
+      }
+      const updateUser = await User.update(
+        { coins },
+        { where: { mobileNumber } }
+      );
+      console.log("update user===>" + JSON.stringify(updateUser));
+      return res.status(200).json({
+        status: "Success",
+        message: "Coins inserted",
+        mobileNumber,
+        coins,
+      });
+    } else {
+      res.status(404).json({
+        status: "Fail",
+        message: "User Not Found",
+      });
+    }
+    console.log("************", updateUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "Fail",
+      message: "Internal Server Error",
+    });
+  }
+};
+// const
 // userInfo
 // exports.userInfo = async (req, res) => {
 //   try {

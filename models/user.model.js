@@ -11,6 +11,10 @@ const User = sequelize.define("User", {
   },
   mobileNumber: {
     type: DataTypes.STRING,
+  },
+  coins:{
+    type : DataTypes.INTEGER,
+    defaultValue : 0
   }
 
 });
