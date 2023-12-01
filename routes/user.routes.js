@@ -1,33 +1,15 @@
 const express = require("express");
-const { login, getCoins, insertCoins } = require("../controller/user.controller");
+const { login,updateCoins } = require("../controller/user.controller");
+
 // const { validationConstant } = require("../constant/validate.constant");
 // const { IsVerify } = require("../middlware/auth");
 // const passport = require('passport');
+
 const userRoutes = express.Router();
 const {validation}=require('../constant/validate.constant')
 
-// signup user
-// userRoutes.post("/signup", validationConstant('register'),signup);
-
-// login user
 userRoutes.post("/login",validation('login'), login);
-userRoutes.get('/getcoins',getCoins)
-userRoutes.put('/insertconis',insertCoins)
+userRoutes.post('/updateCoins', updateCoins);
 
-// view user
-// userRoutes.get("/view", IsVerify, userInfo);
-
-// logout api
-// userRoutes.get("/logout", IsVerify, logout);
-
-// update user
-// userRoutes.put("/update", IsVerify, updateUser);
-
-// google auth
-// userRoutes.get(
-//   "/auth/google",
-//   passport.authenticate("google", { scope: ["profile"] })
-// );
-// userRoutes.post("/signup/google", signupWithGoogle);
 
 module.exports = userRoutes;
