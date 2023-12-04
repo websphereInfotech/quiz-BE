@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
+const sequelize = require("../config/index");
 const jwt = require("jsonwebtoken");
 const Token = require("../models/token.model");
 const { google } = require("googleapis");
@@ -23,9 +24,23 @@ exports.login = async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(409).json({
-        status: "Fail",
-        message: "User with this mobile number already exists.",
+
+      const payload = {
+        id: existingUser.id,
+        mobileNumber: existingUser.mobileNumber,
+        otp:existingUser.otp,
+        coins: existingUser.coins
+      };
+  
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: "20d",
+      });
+
+      return res.status(200).json({
+        status: "Success",
+        message: "User Found Successfully",
+        data: existingUser,
+        token: token,
       });
     }
 
@@ -36,16 +51,17 @@ exports.login = async (req, res) => {
       secret: secret.base32,
     });
 
-    console.log(">>>>>>>>>>", usernew);
-
     const payload = {
       id: usernew.id,
       mobileNumber: usernew.mobileNumber,
+      coins: usernew.coins
     };
 
     const token = jwt.sign(payload, process.env.SECRET_KEY, {
       expiresIn: "20d",
     });
+
+    console.log(">>>>>>>>>>", token);
 
     const otp = speakeasy.totp({
       secret: secret.base32,
@@ -56,11 +72,12 @@ exports.login = async (req, res) => {
 
     return res.status(200).json({
       status: "Success",
-      message: "OTP generated and sent successfully",
+      message: "OTP Generated and Sent Successfully",
       data: usernew,
       otp: otp,
       token: token,
     });
+
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -70,30 +87,34 @@ exports.login = async (req, res) => {
   }
 };
 
+
 exports.updateCoins = async (req, res) => {
   try {
-    const { mobileNumber, coins} = req.body;
-    const user = await User.findOne({ where: { mobileNumber } });
+    const { coins } = req.body;
+    const userId = req.user.id;
+
+    // Update the coins based on your business logic
+    const user = await User.update(
+      { coins: sequelize.literal(`coins + ${coins}`) }, // Increment coins
+      { where: { id: userId } }
+    );
+
     if (!user) {
-      return res.status(404).json({
+      return res.json({
         status: 'Fail',
-        message: 'User not found',
+        message: 'User not found or update failed',
       });
     }
-    console.log("COINS BEFORE:", coins);
-    if (coins >= 0) {
-      // Positive score, add the coins
-      user.coins += coins;
-    }
-    console.log("USERCOINS",user.coins);
-    // Save the changes to the database
-    await user.save();
+
+    const updatedUser = await User.findByPk(userId);
+
     res.json({
       status: 'Success',
-      mobileNumber:user.mobileNumber,
-      totalCoins: user.coins,
+      mobileNumber: updatedUser.mobileNumber,
+      totalCoins: updatedUser.coins,
     });
-    // console.log("COINS",data.totalCoins);
+
+    console.log('COINS AFTER:', updatedUser.coins);
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -102,3 +123,41 @@ exports.updateCoins = async (req, res) => {
     });
   }
 };
+// exports.updateCoins = async (req, res) => {
+//   try {
+//     const { coins} = req.body;
+//     console.log(">>>>>>>>>>>>", req.user.id);
+//     console.log("COINS BEFORE:", coins);
+
+//     const user = await User.findOne({
+//       where: req.user.id
+//     })
+//     if(!user){
+//      return res.json({
+//           status: 'Fail',
+//           message: "user not found"
+//         });
+//     }
+//     console.log(user);
+
+
+//     if (coins >= 0) {
+//       user.coins += coins;
+//     }
+//     console.log("USERCOINS",user.coins);
+//     // await user.save();
+//     res.json({
+//       status: 'Success',
+//       mobileNumber:user.mobileNumber,
+//       totalCoins: user.coins,
+//     });
+//     // console.log("COINS",totalCoins);
+    
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       status: 'Fail',
+//       message: 'Internal Server Error',
+//     });
+//   }
+// };

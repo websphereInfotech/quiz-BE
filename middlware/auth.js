@@ -14,15 +14,7 @@ const IsVerify = async (req, res, next) => {
   }
   const token = auth.split(" ")[1];
 
-
-  const tokenData = await Token.findOne({
-    where: {
-      token,
-      isActive: true,
-    },
-  }); 
-
-  if (!tokenData) {
+  if (!token) {
     return res.status(404).json({
       status: "Fail",
       message: "Required is Login",
@@ -33,7 +25,12 @@ const IsVerify = async (req, res, next) => {
   jwt.verify(token, secret, async (error, UserID) => {
     try {
       // Fetch additional Admin data including role
-      const validUser = await User.findByPk(UserID.id);
+      // console.log(">>>>>>>>>>>", UserID);
+      const validUser = await User.findOne({
+        where:{
+          id: UserID.id
+        }
+      });
 
       if (!validUser) {
         return res.status(404).json({
@@ -42,10 +39,8 @@ const IsVerify = async (req, res, next) => {
         });
       }
 
-      req.user = {
-        ...UserID,
-      };
-
+      req.user = validUser
+      console.log("goging for next page ", req.user);
       next();
     } catch (error) {
       return res.status(403).json({
