@@ -18,20 +18,25 @@ exports.login = async (req, res) => {
   try {
     const { mobileNumber } = req.body;
     console.log("mobileNo:", mobileNumber);
-
+    
     const existingUser = await User.findOne({
       where: { mobileNumber },
     });
+    const secret = speakeasy.generateSecret({ length: 20 });
+    
+        const otp = speakeasy.totp({
+          secret: secret.base32,
+          encoding: "base32",
+        });
 
     if (existingUser) {
 
       const payload = {
         id: existingUser.id,
         mobileNumber: existingUser.mobileNumber,
-        otp:existingUser.otp,
         coins: existingUser.coins
       };
-  
+      
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
         expiresIn: "20d",
       });
@@ -41,10 +46,10 @@ exports.login = async (req, res) => {
         message: "User Found Successfully",
         data: existingUser,
         token: token,
+        otp:otp
       });
     }
 
-    const secret = speakeasy.generateSecret({ length: 20 });
 
     const usernew = await User.create({
       mobileNumber,
@@ -62,11 +67,6 @@ exports.login = async (req, res) => {
     });
 
     console.log(">>>>>>>>>>", token);
-
-    const otp = speakeasy.totp({
-      secret: secret.base32,
-      encoding: "base32",
-    });
 
     console.log("Generated OTP:", otp);
 
@@ -93,7 +93,6 @@ exports.updateCoins = async (req, res) => {
     const { coins } = req.body;
     const userId = req.user.id;
 
-    // Update the coins based on your business logic
     const user = await User.update(
       { coins: sequelize.literal(`coins + ${coins}`) }, // Increment coins
       { where: { id: userId } }
@@ -114,7 +113,7 @@ exports.updateCoins = async (req, res) => {
       totalCoins: updatedUser.coins,
     });
 
-    console.log('COINS AFTER:', updatedUser.coins);
+    console.log('COINS AFTER:', updatedUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({
