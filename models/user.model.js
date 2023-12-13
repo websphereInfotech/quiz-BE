@@ -14,7 +14,7 @@ const User = sequelize.define("User", {
   },
   coins:{
     type : DataTypes.INTEGER,
-    defaultValue : 0
+    defaultValue: 200,
   }
 
 });
