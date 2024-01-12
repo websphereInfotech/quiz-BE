@@ -86,17 +86,19 @@ exports.login = async (req, res) => {
     });
   }
 };
-
+// exports.login
 
 exports.updateCoins = async (req, res) => {
   try {
     const { coins } = req.body;
     const userId = req.user.id;
 
-    const user = await User.update(
-      { coins: sequelize.literal(`coins + ${coins}`) }, // Increment coins
-      { where: { id: userId } }
-    );
+    const user = await User.findByPk(userId);
+
+    // const user = await User.update(
+    //   { coins: sequelize.literal(`coins + ${coins}`) }, // Increment coins
+    //   { where: { id: userId } }
+    // );
 
     if (!user) {
       return res.json({
@@ -104,6 +106,8 @@ exports.updateCoins = async (req, res) => {
         message: 'User not found or update failed',
       });
     }
+
+    await user.increment('coins', { by: coins });
 
     const updatedUser = await User.findByPk(userId);
 
@@ -122,7 +126,7 @@ exports.updateCoins = async (req, res) => {
     });
   }
 };
-// exports.updateCoins = async (req, res) => {
+// exports.updateCoins = async (req, res) => {  
 //   try {
 //     const { coins} = req.body;
 //     console.log(">>>>>>>>>>>>", req.user.id);
