@@ -4,6 +4,7 @@ const sequelize = require("../config/index");
 const jwt = require("jsonwebtoken");
 const Token = require("../models/token.model");
 const { google } = require("googleapis");
+
 // const { OAuth2 } = google.auth;
 // const oAuth2Client = new OAuth2(
 //   process.env.GOOGLE_CLIENT_ID,
@@ -12,7 +13,7 @@ const { google } = require("googleapis");
 // );
 // const twilio = require('twilio');
 // const Nexmo = require('nexmo');
-const speakeasy = require("speakeasy");
+// const speakeasy = require("speakeasy");
 
 exports.login = async (req, res) => {
   try {
@@ -22,12 +23,13 @@ exports.login = async (req, res) => {
     const existingUser = await User.findOne({
       where: { mobileNumber },
     });
-    const secret = speakeasy.generateSecret({ length: 20 });
+
+    // const secret = speakeasy.generateSecret({ length: 20 });
     
-        const otp = speakeasy.totp({
-          secret: secret.base32,
-          encoding: "base32",
-        });
+    //     const otp = speakeasy.totp({
+    //       secret: secret.base32,
+    //       encoding: "base32",
+    //     });
 
     if (existingUser) {
 
@@ -45,15 +47,15 @@ exports.login = async (req, res) => {
         status: "Success",
         message: "User Found Successfully",
         data: existingUser,
-        token: token,
-        otp:otp
+        token: token
+        // otp:otp
       });
     }
 
 
     const usernew = await User.create({
-      mobileNumber,
-      secret: secret.base32,
+      mobileNumber
+      // secret: secret.base32,
     });
 
     const payload = {
@@ -68,14 +70,14 @@ exports.login = async (req, res) => {
 
     console.log(">>>>>>>>>>", token);
 
-    console.log("Generated OTP:", otp);
+    // console.log("Generated OTP:", otp);
 
     return res.status(200).json({
       status: "Success",
       message: "OTP Generated and Sent Successfully",
       data: usernew,
-      otp: otp,
-      token: token,
+      token: token
+      // otp: otp,
     });
 
   } catch (error) {
@@ -86,6 +88,7 @@ exports.login = async (req, res) => {
     });
   }
 };
+
 // exports.login
 
 exports.updateCoins = async (req, res) => {
