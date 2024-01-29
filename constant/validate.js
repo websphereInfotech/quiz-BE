@@ -30,6 +30,34 @@ exports.mobileNo = function (req, res, next) {
     next();
   }
 };
+exports.email = function (req, res, next) {
+  const { email } = req.body;
+  if (email === null || email === undefined || email === "") {
+    return res.status(400).json({
+      status: "fail",
+      message: "email Cannot Be Empty",
+    });
+  }
+  const emailSchema = Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
+    .required()
+    .messages({
+      "string.base": "Email Must Be A String",
+      "string.email": "Invalid Email Format",
+      "any.required": "Required field: Email",
+    });
+
+  const { error: emailError } = emailSchema.validate(email);
+
+  if (emailError) {
+    return res.status(400).json({
+      status: "fail",
+      message: emailError.message,
+    });
+  } else {
+    next();
+  }
+};
 // module.exports.validator = {
 //   NAME: Joi.string()
 //     .trim()

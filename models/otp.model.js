@@ -1,8 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/index");
-const tokenModel = require('./token.model')
 
-const User = sequelize.define("User", {
+const Otp = sequelize.define("Otp", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -13,17 +12,13 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
-  coins:{
-    type : DataTypes.INTEGER,
-    defaultValue: 200,
-    allowNull: false
-  }
-
+  otp: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
-User.hasMany(tokenModel)
-
-module.exports = User;
+module.exports = Otp;

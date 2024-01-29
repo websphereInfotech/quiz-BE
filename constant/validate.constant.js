@@ -1,4 +1,4 @@
-const { mobileNo } = require("./validate");
+const { email } = require("./validate");
 
 module.exports.validation = function (method) {
   // const validateSchema = Joi.object({
@@ -27,7 +27,7 @@ module.exports.validation = function (method) {
     //   };
 
     case "login":
-      return [mobileNo];
+      return [email];
 
     // case "update":
     //   return (req, res, next) => {
