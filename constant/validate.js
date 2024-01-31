@@ -58,6 +58,53 @@ exports.email = function (req, res, next) {
     next();
   }
 };
+
+exports.emailAndOtp = function (req, res, next) {
+  const { email, otp } = req.body;
+
+  // Validate email
+  if (email === null || email === undefined || email === "") {
+    return res.status(400).json({
+      status: "fail",
+      message: "Email Cannot Be Empty",
+    });
+  }
+
+  const emailSchema = Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
+    .required()
+    .messages({
+      "string.base": "Email Must Be A String",
+      "string.email": "Invalid Email Format",
+      "any.required": "Required field: Email",
+    });
+
+  const { error: emailError } = emailSchema.validate(email);
+
+  if (emailError) {
+    return res.status(400).json({
+      status: "fail",
+      message: emailError.message,
+    });
+  }
+
+  // Validate OTP
+  if (
+    otp === null ||
+    otp === undefined ||
+    otp.toString().length !== 6 ||
+    isNaN(otp)
+  ) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Invalid OTP. OTP must be a 6-digit number.",
+    });
+  }
+
+  // Continue if both email and OTP are valid
+  next();
+};
+
 // module.exports.validator = {
 //   NAME: Joi.string()
 //     .trim()

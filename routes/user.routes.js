@@ -9,7 +9,7 @@ const userRoutes = express.Router();
 const {validation}=require('../constant/validate.constant')
 
 userRoutes.post("/login",validation('login'), login);
-userRoutes.post('/otp_verify', verifyOTP)
+userRoutes.post('/otp_verify',validation('otpVerify'), verifyOTP)
 userRoutes.post('/updateCoins',IsVerify, updateCoins);
 
 
