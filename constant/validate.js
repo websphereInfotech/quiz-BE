@@ -1,35 +1,35 @@
 const Joi = require("joi");
 
-exports.mobileNo = function (req, res, next) {
-  const { mobileNumber } = req.body;
-  if (mobileNumber === null || mobileNumber === undefined || mobileNumber === "") {
-    return res.status(400).json({
-      status: "fail",
-      message: "Mobile Number Cannot Be Empty",
-    });
-  }
-  const mobileNumberSchema = Joi.string()
-    .min(10)
-    .max(10)
-    .required()
-    .messages({
-      "string.base": "Mobile Number Must Be A Number",
-      "string.min": "Mobile Number Must Have At Least 10 Digits",
-      "string.max": "Mobile Number Cannot Have More Than 10 Digits",
-      "any.required": "Required field: Mobile Number",
-    });
+// exports.mobileNo = function (req, res, next) {
+//   const { mobileNumber } = req.body;
+//   if (mobileNumber === null || mobileNumber === undefined || mobileNumber === "") {
+//     return res.status(400).json({
+//       status: "fail",
+//       message: "Mobile Number Cannot Be Empty",
+//     });
+//   }
+//   const mobileNumberSchema = Joi.string()
+//     .min(10)
+//     .max(10)
+//     .required()
+//     .messages({
+//       "string.base": "Mobile Number Must Be A Number",
+//       "string.min": "Mobile Number Must Have At Least 10 Digits",
+//       "string.max": "Mobile Number Cannot Have More Than 10 Digits",
+//       "any.required": "Required field: Mobile Number",
+//     });
 
-  const { error: mobileNumberError } = mobileNumberSchema.validate(mobileNumber);
+//   const { error: mobileNumberError } = mobileNumberSchema.validate(mobileNumber);
 
-  if (mobileNumberError) {
-    return res.status(400).json({
-      status: "fail",
-      message: mobileNumberError.message,
-    });
-  } else {
-    next();
-  }
-};
+//   if (mobileNumberError) {
+//     return res.status(400).json({
+//       status: "fail",
+//       message: mobileNumberError.message,
+//     });
+//   } else {
+//     next();
+//   }
+// };
 exports.email = function (req, res, next) {
   const { email } = req.body;
   if (email === null || email === undefined || email === "") {
