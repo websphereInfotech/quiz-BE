@@ -1,41 +1,34 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/index");
 const Answer = require("./answer.model");
+const SubCategory = require("./subcategory.model");
 
 const Question = sequelize.define("Question", {
-  id: {
+  subCategoryId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
   },
-  question: {
+  category: {
     type: DataTypes.STRING,
-    unique: true,
+    // unique: true,
     allowNull: false,
   },
-  A:{
+  question:{
     type: DataTypes.STRING,
     allowNull: false
   },
-  B:{
+  correct_answer:{
     type: DataTypes.STRING,
     allowNull: false
   },
-  C:{
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  D:{
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  category:{
-    type: DataTypes.STRING,
-    allowNull: false
-  }
+  answer: {
+    type: DataTypes.JSON,
+    allowNull: false,
+    defaultValue: [],
+   },
 });
 
-Question.hasOne(Answer);
+Question.belongsTo(SubCategory, { foreignKey: "subCategoryId" });
+
 
 module.exports = Question;

@@ -149,7 +149,7 @@ exports.updateCoins = async (req, res) => {
       totalCoins: updatedUser.coins,
     });
 
-    console.log("COINS AFTER:", updatedUser);
+    // console.log("COINS AFTER:", updatedUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({

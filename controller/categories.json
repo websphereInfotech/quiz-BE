@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "category": "General Knowledge",
+        "image": "https://lh3.googleusercontent.com/0E2aT9nRYrvrdwJgRabY1vgVC_29ToAEbM2tzWuNoTNHgI6IjlA10elxsVcuoEAFwfFP=w300",
+        "subcategories": [
+            {
+                "id": 101,
+                "subcategory": "History",
+                "image": "https://lh3.googleusercontent.com/0E2aT9nRYrvrdwJgRabY1vgVC_29ToAEbM2tzWuNoTNHgI6IjlA10elxsVcuoEAFwfFP=w300"
+            },
+            {
+                "id": 102,
+                "subcategory": "Geography",
+                "image": "https://lh3.googleusercontent.com/0E2aT9nRYrvrdwJgRabY1vgVC_29ToAEbM2tzWuNoTNHgI6IjlA10elxsVcuoEAFwfFP=w300"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category": "Entertainment",
+        "image": "https://images.zeald.com/site/under5s/images//originals/exploring-science-and-nature.1.1.jpg",
+        "subcategories": [
+            {
+                "id": 201,
+                "subcategory": "Movies",
+                "image": "https://images.zeald.com/site/under5s/images//originals/exploring-science-and-nature.1.1.jpg"
+            },
+            {
+                "id": 202,
+                "subcategory": "Music",
+                "image": "https://images.zeald.com/site/under5s/images//originals/exploring-science-and-nature.1.1.jpg"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category": "Science & Nature",
+        "image": "https://images.zeald.com/site/under5s/images//originals/exploring-science-and-nature.1.1.jpg",
+        "subcategories": [
+            {
+                "id": 301,
+                "subcategory": "Biology",
+                "image": "https://images.zeald.com/site/under5s/images//originals/exploring-science-and-nature.1.1.jpg"
+            },
+            {
+                "id": 302,
+                "subcategory": "Physics",
+                "image": "https://images.zeald.com/site/under5s/images//originals/exploring-science-and-nature.1.1.jpg"
+            }
+        ]
+    }
+]

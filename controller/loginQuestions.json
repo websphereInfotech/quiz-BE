@@ -1,0 +1,92 @@
+ [
+        {
+            "question": "In the 1984 movie &quot;The Terminator&quot;, what model number is the Terminator portrayed by Arnold Schwarzenegger?",
+            "correct_answer": "T-800",
+            "answers": [
+                "I-950",
+                "T-888",
+                "T-1000",
+                "T-800"
+            ]
+        },
+        {
+            "question": "Which puzzle game was designed by a Russian programmer, featuring Russian buildings and music?",
+            "correct_answer": "Tetris",
+            "answers": [
+                "Jenga",
+                "Boulder Dash",
+                "Puzzled",
+                "Tetris"
+            ]
+        },
+        {
+            "question": "What type of animal is a natterjack?",
+            "correct_answer": "Toad",
+            "answers": [
+                "Bird",
+                "Fish",
+                "Insect",
+                "Toad"
+            ]
+        },
+        {
+            "question": "Before 2011, &quot;True Capitalist Radio&quot; was known by a different name. What was that name?",
+            "correct_answer": "True Conservative Radio",
+            "answers": [
+                "True Republican Radio",
+                "Texan Capitalist Radio",
+                "United Capitalists",
+                "True Conservative Radio"
+            ]
+        },
+        {
+            "question": "After India, which country produces the second most movies per year?",
+            "correct_answer": "Nigeria",
+            "answers": [
+                "United States",
+                "China",
+                "France",
+                "Nigeria"
+            ]
+        },
+        {
+            "question": "What was the name of the first MMORPG to popularize the genre?",
+            "correct_answer":"Nigeria",
+            "answers": [
+                "World of Warcraft",
+                "Meridian 59",
+                "Guild Wars",
+                "Nigeria"
+            ]
+        },
+        {
+            "question": "For what reason would a spotted hyena &quot;laugh&quot;?",
+            "correct_answer": "Nervousness",
+            "answers": [
+                "Excitement",
+                "Aggression",
+                "Exhaustion",
+                "Nervousness"
+            ]
+        },
+        {
+            "question": "What character in the Winnie the Pooh films was added by Disney and does not appear in the original books?",
+            "correct_answer": "Gopher",
+            "answers": [
+                "Tigger",
+                "Heffalumps",
+                "Rabbit",
+                "Gopher"
+            ]
+        },
+        {
+            "question": "On which aircraft carrier did the Doolitte Raid launch from on April 18, 1942 during World War II?",
+            "correct_answer": "USS Hornet",
+            "answers": [
+                "USS Enterprise",
+                "USS Lexington",
+                "USS Saratoga",
+                "USS Hornet"
+            ]
+        }
+    ]

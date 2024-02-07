@@ -1,0 +1,244 @@
+
+[
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which Aerosmith album featured &quot;Walk This Way&quot;?",
+            "correct_answer": "Toys in the Attic",
+            "incorrect_answers": [
+                "Rocks",
+                "Get Your Wings",
+                "Draw the Line",
+                "Toys in the Attic"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which band released the album &quot;Sonic Highways&quot; in 2014?",
+            "correct_answer": "Foo Fighters",
+            "incorrect_answers": [
+                "Coldplay",
+                "Nickelback",
+                "The Flaming Lips",
+                "Foo Fighters"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which one of these Pink Floyd albums were also a movie?",
+            "correct_answer": "The Wall",
+            "incorrect_answers": [
+                "The Dark Side of the Moon",
+                "Wish You Were Here",
+                "Animals",
+                "The Wall"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which of the following bands is Tom DeLonge not a part of?",
+            "correct_answer": "+44",
+            "incorrect_answers": [
+                "Box Car Racer",
+                "Blink-182",
+                "Angels &amp; Airwaves",
+                "+44"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which alternative rock band released the critically-acclaimed album &quot;OK Computer&quot;?",
+            "correct_answer": "Radiohead",
+            "incorrect_answers": [
+                "R.E.M.",
+                "Nirvana",
+                "Coldplay",
+                "Radiohead"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which of these is NOT a name of an album released by American rapper Pitbull?",
+            "correct_answer": "Welcome to Miami",
+            "incorrect_answers": [
+                "Dale",
+                "Global Warming",
+                "Armando",
+                "Welcome to Miami"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Ellie Goulding&#039;s earliest album was named?",
+            "correct_answer": "Lights",
+            "incorrect_answers": [
+                "Halcyon",
+                "Bright Lights",
+                "Halcyon Days",
+                "Lights"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "In 2015, David Hasselhof released a single called...",
+            "correct_answer": "True Survivor",
+            "incorrect_answers": [
+                "True Fighter",
+                "Real Kung-Fury",
+                "Real Warrior",
+                "True Survivor"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which of these is not a single by Pink Floyd guitarist, David Gilmour?",
+            "correct_answer": "Sunset Strip",
+            "incorrect_answers": [
+                "Rattle That Lock",
+                "Blue Light",
+                "Arnold Layne",
+                "Sunset Strip"
+            ]
+        },
+        {
+            "subCategoryId": "202",
+            "category": "Entertainment: Music",
+            "question": "Which of these Johns was murdered by gunshots outside the Dakota in New York in 1980?",
+            "correct_answer": "John Lennon",
+            "incorrect_answers": [
+                "Johnny Thunders",
+                "John Denver",
+                "John Cascella",
+                "John Lennon"
+            ]
+        },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "In &quot;ALF&quot;, what was ALF&#039;s real name?",
+                "correct_answer": "Gordon Shumway",
+                "incorrect_answers": [
+                    "Gordon Milipp",
+                    "Gordon Foster",
+                    "Gordon von Gam",
+                    "Gordon Shumway"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "In the movie &quot;Blade Runner&quot;, what is the term used for human-like androids ?",
+                "correct_answer": "Replicants",
+                "incorrect_answers": [
+                    "Cylons",
+                    "Synthetics",
+                    "Skinjobs",
+                    "Replicants"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "Who played Deputy Marshal Samuel Gerard in the 1993 film &quot;The Fugitive&quot;?",
+                "correct_answer": "Tommy Lee Jones",
+                "incorrect_answers": [
+                    "Harrison Ford",
+                    "Harvey Keitel",
+                    "Martin Landau",
+                    "Tommy Lee Jones"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "In the movie &quot;Cast Away&quot; the main protagonist&#039;s best friend while on the island is named",
+                "correct_answer": "Wilson",
+                "incorrect_answers": [
+                    "Carson",
+                    "Jackson",
+                    "Willy",
+                    "Wilson"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "In the movie &quot;Spaceballs&quot;, what are the Spaceballs attempting to steal from Planet Druidia?",
+                "correct_answer": "Air",
+                "incorrect_answers": [
+                    "The Schwartz",
+                    "Princess Lonestar",
+                    "Meatballs",
+                    "Air"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "Who in Pulp Fiction says &quot;No, they got the metric system there, they wouldn&#039;t know what the fuck a Quarter Pounder is.&quot;",
+                "correct_answer": "Vincent Vega",
+                "incorrect_answers": [
+                    "Jules Winnfield",
+                    "Jimmie Dimmick",
+                    "Butch Coolidge",
+                    "Vincent Vega"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "In Big Hero 6, what fictional city is the Big Hero 6 from?",
+                "correct_answer": "San Fransokyo",
+                "incorrect_answers": [
+                    "San Tokyo",
+                    "Tokysisco",
+                    "Sankyo",
+                    "San Fransokyo"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "Which movie contains the quote, &quot;Say hello to my little friend!&quot;?",
+                "correct_answer": "Scarface",
+                "incorrect_answers": [
+                    "Reservoir Dogs",
+                    "Heat",
+                    "Goodfellas",
+                    "Scarface"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "Who directed the movies &quot;Pulp Fiction&quot;, &quot;Reservoir Dogs&quot; and &quot;Django Unchained&quot;?",
+                "correct_answer": "Quentin Tarantino",
+                "incorrect_answers": [
+                    "Martin Scorcese",
+                    "Steven Spielberg",
+                    "James Cameron",
+                    "Quentin Tarantino"
+                ]
+            },
+            {
+                "subCategoryId": "201",
+                "category": "Entertainment: Movies",
+                "question": "In the 1992 film &quot;Army of Darkness&quot;, what name does Ash give to his double-barreled shotgun?",
+                "correct_answer": "Boomstick",
+                "incorrect_answers": [
+                    "Bloomstick",
+                    "Blastbranch",
+                    "2-Pump Chump",
+                    "Boomstick"
+                ]
+            }
+        ]
+
