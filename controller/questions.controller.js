@@ -1,4 +1,3 @@
-
 // const axios = require('axios');
 // const sequelize = require('../config/index');
 // const fs = require('fs');
@@ -41,7 +40,7 @@
 //   }
 // };
 
-// // Category Questions 
+// // Category Questions
 // exports.Questions = async (req, res) => {
 //   try {
 //     // const id = req.params.id;
@@ -49,7 +48,7 @@
 //     // const filePath = path.join(__dirname,'questions.json');
 
 //     // const questionBuffer = await readFileAsync(filePath);
-//     // const QuestionsData = questionBuffer.toString('utf-8'); 
+//     // const QuestionsData = questionBuffer.toString('utf-8');
 //     // const questionsFromJson = JSON.parse(QuestionsData); // Use a different variable name
 
 //     // const Questions = await Question.findAll({
@@ -61,7 +60,7 @@
 //     console.log("id",id);
 //     const Questions = await Question.findAll({
 //       where: { subCategoryId: id },
-//       include: SubCategory, 
+//       include: SubCategory,
 //     });
 //     console.log("questionsFromJson", Questions);
 //     if (Questions.length > 0) {
@@ -86,32 +85,48 @@
 //   }
 // };
 
-const axios = require('axios');
-// Category Questions 
+const axios = require("axios");
+const { Questions, SubCategory, Category } = require("../models");
+const sequelize = require("../config");
+// Category Questions
 exports.Questions = async (req, res) => {
-  const headers = {
-    Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
-  };
+  // const headers = {
+  //   Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
+  // };
 
   try {
     const id = req.query.quiz;
 
-const response = await axios.get(
-  `https://api.quiztwiz.com/api/question/?quiz=${id}`,
-  { headers }
-);
-    const questions = response.data.data;
-
-    if (questions.length > 0) {
+    // const response = await axios.get(
+    //   `https://api.quiztwiz.com/api/question/?quiz=${id}`,
+    //   { headers }
+    // );
+    //     const questions = response.data.data;
+    const questions = await Questions.findAll({
+      where: {
+        SubCategoryId: id,
+      },
+      order: sequelize.literal("RAND()"), // Order by random to get a random set
+      limit: 15, // Limit the result to 15 questions
+      include: {
+        model: SubCategory,
+        as: "quiz",
+        include: {
+          model: Category,
+          as: "category",
+        },
+      },
+    });
+    if (questions.length) {
       res.status(200).json({
         success: true,
-        message: 'Questions Data Fetch Successfully ',
+        message: "Questions Data Fetch Successfully ",
         data: questions,
       });
     } else {
       res.status(404).json({
         success: false,
-        message: 'Questions Data Not Found',
+        message: "Questions Data Not Found",
       });
     }
   } catch (error) {
@@ -132,7 +147,7 @@ exports.LoginQuestions = async (req, res) => {
 
   try {
     const response = await axios.get(
-      'https://api.quiztwiz.com/api/question/?start=true',
+      "https://api.quiztwiz.com/api/question/?start=true",
       { headers }
     );
 
@@ -141,13 +156,13 @@ exports.LoginQuestions = async (req, res) => {
     if (questions.length > 0) {
       res.status(200).json({
         success: true,
-        message: 'Questions Data Fetch Successfully ',
+        message: "Questions Data Fetch Successfully ",
         data: questions,
       });
     } else {
       res.status(404).json({
         success: false,
-        message: 'Questions Data Not Found',
+        message: "Questions Data Not Found",
       });
     }
   } catch (error) {
@@ -159,4 +174,3 @@ exports.LoginQuestions = async (req, res) => {
     });
   }
 };
-

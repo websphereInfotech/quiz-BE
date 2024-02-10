@@ -6,7 +6,7 @@ const Token = require("../models/token.model");
 const { google } = require("googleapis");
 const transporter = require("../config/email");
 const { config } = require("dotenv");
-const { Otp } = require("../models");
+const { Otp, Category, SubCategory } = require("../models");
 config();
 // const { OAuth2 } = google.auth;
 // const oAuth2Client = new OAuth2(
@@ -80,8 +80,8 @@ exports.login = async (req, res) => {
 
     const existingOTP = await Otp.findOne({
       where: {
-        email
-      }
+        email,
+      },
     });
     if (existingOTP) {
       existingOTP.otp = otp;
@@ -165,14 +165,16 @@ exports.verifyOTP = async (req, res) => {
   const getOTP = await Otp.findOne({
     where: {
       email,
-      otp
-    }
+      otp,
+    },
   });
   if (getOTP) {
     await getOTP.destroy();
-    const getUser = await User.findOne({ where: {
-      email
-    }});
+    const getUser = await User.findOne({
+      where: {
+        email,
+      },
+    });
     if (getUser) {
       const payload = {
         id: getUser.id,
@@ -209,7 +211,7 @@ exports.verifyOTP = async (req, res) => {
         token,
       });
     }
-  }else{
+  } else {
     return res.status(400).json({
       status: "Success",
       message: "Incorrect OTP",

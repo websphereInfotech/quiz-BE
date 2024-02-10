@@ -3,6 +3,7 @@ const axios = require("axios");
 // const path = require('path');
 // const Category = require('../models/category.model');
 const sequelize = require("../config/index");
+const { Category, SubCategory } = require("../models");
 // // all Category Data
 // const CategoryData = async (Categories) => {
 //   try {
@@ -210,90 +211,107 @@ const sequelize = require("../config/index");
 //   }
 // };
 
- exports.Categories = async (req,res) => {
-  const headers = {
-        Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
-      }
-      try {
-        const response = await axios.get(
-                "https://api.quiztwiz.com/api/question/categories",{headers}
-              );
-            const category = response.data.data
-            if(category) {
-              res.status(200).json({
-                  success: true,
-                  message: 'Category Data Fetch Successfully',
-                  data:category
-              })
-            } else {
-              res.status(200).json({
-                success: false,
-                message: 'Category Data Not Found'
-            })
-            }
-      } catch (error) {
-        console.log(error);
-        res.status(500).json({
-          success: false,
-          message: "Internal Server Error"
-        })
-      }
- };
-// All Sub Category Data
-exports.AllSubCategories = async (req, res) => {
-  const headers = {
-    Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
-  }
+exports.Categories = async (req, res) => {
+  // const headers = {
+  //       Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
+  //     }
   try {
-    const response = await axios.get(
-      "https://api.quiztwiz.com/api/question/quizzes", { headers }
-    );
-    const category = response.data.data
-    if (category) {
+    // const response = await axios.get(
+    //         "https://api.quiztwiz.com/api/question/categories",{headers}
+    //       );
+    // const category = response.data.data
+
+    const categories = await Category.findAll();
+    if (categories.length) {
       res.status(200).json({
         success: true,
-        message: 'AllSubCategory Data Fetch Successfully',
-        data: category
-      })
+        message: "Category Data Fetch Successfully",
+        data: categories,
+      });
     } else {
       res.status(200).json({
         success: false,
-        message: 'AllSubCategory Data Not Found'
-      })
+        message: "Category Data Not Found",
+      });
     }
   } catch (error) {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Internal Server Error"
-    })
+      message: "Internal Server Error",
+    });
+  }
+};
+// All Sub Category Data
+exports.AllSubCategories = async (req, res) => {
+  // const headers = {
+  //   Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
+  // }
+  try {
+    // const response = await axios.get(
+    //   "https://api.quiztwiz.com/api/question/quizzes", { headers }
+    // );
+    // const category = response.data.data
+    const subcategories = await SubCategory.findAll({
+      include: {
+        model: Category,
+        as: "category",
+      },
+    });
+    if (subcategories.length) {
+      res.status(200).json({
+        success: true,
+        message: "AllSubCategory Data Fetch Successfully",
+        data: subcategories,
+      });
+    } else {
+      res.status(200).json({
+        success: false,
+        message: "AllSubCategory Data Not Found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 };
 // Single Subcategory
- exports.SubCategories = async (req, res) => {
-  const headers = {
-    Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
-  };
+exports.SubCategories = async (req, res) => {
+  // const headers = {
+  //   Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
+  // };
 
   try {
     const id = req.params.id;
-    const response = await axios.get(
-      `https://api.quiztwiz.com/api/question/quizzes?id=${id}`,
-      { headers }
-    );
+    // const response = await axios.get(
+    //   `https://api.quiztwiz.com/api/question/quizzes?id=${id}`,
+    //   { headers }
+    // );
 
-    const category = response.data.data;
+    // const category = response.data.data;
+    const subcategories = await SubCategory.findAll({
+      where: {
+        CategoryId: id,
+      },
+      include: {
+        model: Category,
+        as: "category",
+      },
+    });
 
-    if (category.length > 0) {
-      res.status(200).json({
+    if (subcategories.length > 0) {
+      return res.status(200).json({
         success: true,
-        message: 'SubCategory Data Fetch Successfully',
-        data: category,
+        message: "SubCategory Data Fetch Successfully",
+        data: subcategories,
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
-        message: 'SubCategory Data Not Found',
+        message: "SubCategory Data Not Found",
       });
     }
   } catch (error) {

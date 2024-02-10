@@ -1,5 +1,5 @@
 const express = require("express");
-const { login,updateCoins,verifyOTP } = require("../controller/user.controller");
+const { login,updateCoins,verifyOTP, test } = require("../controller/user.controller");
 
 // const { validationConstant } = require("../constant/validate.constant");
 const { IsVerify } = require("../middlware/auth");
@@ -11,6 +11,7 @@ const {validation}=require('../constant/validate.constant')
 userRoutes.post("/login",validation('login'), login);
 userRoutes.post('/otp_verify',validation('otpVerify'), verifyOTP)
 userRoutes.post('/updateCoins',IsVerify, updateCoins);
+userRoutes.get('/test', test)
 
 
 module.exports = userRoutes;
