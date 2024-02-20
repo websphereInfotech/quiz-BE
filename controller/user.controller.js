@@ -103,7 +103,6 @@ exports.login = async (req, res) => {
     //   expiresIn: "20d",
     // });
 
-    // console.log("Generated OTP:", otp);
 
     return res.status(200).json({
       status: "Success",
@@ -149,7 +148,6 @@ exports.updateCoins = async (req, res) => {
       totalCoins: updatedUser.coins,
     });
 
-    // console.log("COINS AFTER:", updatedUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({

@@ -21,11 +21,9 @@ const IsVerify = async (req, res, next) => {
     });
   }
 
-  // console.log(token);
   jwt.verify(token, secret, async (error, UserID) => {
     try {
       // Fetch additional Admin data including role
-      // console.log(">>>>>>>>>>>", UserID);
       const validUser = await User.findOne({
         where:{
           id: UserID.id
