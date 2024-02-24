@@ -7,16 +7,77 @@ const { google } = require("googleapis");
 const transporter = require("../config/email");
 const { config } = require("dotenv");
 const { Otp, Category, SubCategory } = require("../models");
-config();
+const { OAuth2Client } = require('google-auth-library');
 // const { OAuth2 } = google.auth;
-// const oAuth2Client = new OAuth2(
-//   process.env.GOOGLE_CLIENT_ID,
-//   process.env.GOOGLE_CLIENT_SECRET,
-//   process.env.GOOGLE_CALLBACK_URL
-// );
-// const twilio = require('twilio');
-// const Nexmo = require('nexmo');
-// const speakeasy = require("speakeasy");
+
+config();
+
+
+const googleClient = new OAuth2Client(process.env.CLIENTID);
+console.log(googleClient,"dta");
+
+exports.signupWithGoogle = async (req, res) => {
+  try {
+    const { idToken } = req.body;
+    console.log(req.body, "body");
+
+    const ticket = await googleClient.verifyIdToken({
+      idToken,
+      audience: process.env.CLIENTID,
+    });
+    console.log(ticket, "ticket");
+
+    const { name, email } = ticket.getPayload();
+
+    let user = await User.findOne({ where: { email } });
+
+    if (user) {
+     
+      user.email = email;
+
+      await user.save();
+    } else {
+      // User does not exist, create a new user
+      user = await User.create({
+        name: name,
+        email: email,
+        password: "generatedPassword",
+      });
+    }
+
+    const payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      mobileNumber: user.mobileNumber,
+    };
+
+    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: "20d",
+    });
+
+    const newToken = await Token.create({
+      token: token,
+      isActive: true,
+      UserId: user.id,
+    });
+
+    return res.status(201).json({
+      status: "Success",
+      message: "User created successfully with Google",
+      data: user,
+      token: token,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: "Fail",
+      error: "Internal Server Error",
+    });
+  }
+};
+
 
 exports.login = async (req, res) => {
   try {
@@ -116,8 +177,6 @@ exports.login = async (req, res) => {
     });
   }
 };
-
-// exports.login
 
 exports.updateCoins = async (req, res) => {
   try {
