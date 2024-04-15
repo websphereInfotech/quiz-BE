@@ -1,44 +1,44 @@
 // const axios = require('axios');
 // const sequelize = require('../config/index');
-// const fs = require('fs');
+const fs = require('fs');
 // const { json } = require('sequelize');
-// const  loginQuestion  = require('../models/loginquestions.model');
-// const path = require('path');
-// const { promisify } = require('util');
-// const readFileAsync = promisify(fs.readFile);
+const  loginQuestion  = require('../models/loginquestions.model');
+const path = require('path');
+const { promisify } = require('util');
+const readFileAsync = promisify(fs.readFile);
 // const Question = require('../models/questions.model');
 // const SubCategory = require('../models/subcategory.model');
 
-// exports.LoginQuestions = async (req, res) => {
-//   try {
-//     // const rootDir = path.resolve(__dirname, '..'); // Move one level up to the root
-//     const filePath = path.join(__dirname, 'loginQuestions.json');
+exports.LoginQuestions = async (req, res) => {
+  try {
+    // const rootDir = path.resolve(__dirname, '..'); // Move one level up to the root
+    const filePath = path.join(__dirname, 'loginQuestions.json');
 
-//     // console.log('file', filePath);
-//     // console.log('Current working directory:', process.cwd());
+    // console.log('file', filePath);
+    // console.log('Current working directory:', process.cwd());
 
-//     const loginQuestionsBuffer = await readFileAsync(filePath); // Use promisified version
-//     const loginQuestionsData = loginQuestionsBuffer.toString('utf-8');
-//         // console.log('login', loginQuestionsData);
-//     const loginquestion = JSON.parse(loginQuestionsData);
+    const loginQuestionsBuffer = await readFileAsync(filePath); // Use promisified version
+    const loginQuestionsData = loginQuestionsBuffer.toString('utf-8');
+        // console.log('login', loginQuestionsData);
+    const loginquestion = JSON.parse(loginQuestionsData);
 
-//     await loginQuestion.sync();
-//     await loginQuestion.bulkCreate(loginquestion);
+    await loginQuestion.sync();
+    await loginQuestion.bulkCreate(loginquestion);
 
-//     res.status(200).json({
-//       success: true,
-//       message: 'Questions Data Fetch Successfully',
-//       data: loginquestion,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Internal Server Error',
-//       error: error.message,
-//     });
-//   }
-// };
+    res.status(200).json({
+      success: true,
+      message: 'Questions Data Fetch Successfully',
+      data: loginquestion,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
 
 // // Category Questions
 // exports.Questions = async (req, res) => {
@@ -140,37 +140,37 @@ exports.Questions = async (req, res) => {
 };
 
 // Login Page Questions
-exports.LoginQuestions = async (req, res) => {
-  const headers = {
-    Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
-  };
+// exports.LoginQuestions = async (req, res) => {
+//   const headers = {
+//     Origin: "https://monetix-bhaveshbhai.quiztwiz.com",
+//   };
 
-  try {
-    const response = await axios.get(
-      "https://api.quiztwiz.com/api/question/?start=true",
-      { headers }
-    );
+//   try {
+//     const response = await axios.get(
+//       "https://api.quiztwiz.com/api/question/?start=true",
+//       { headers }
+//     );
 
-    const questions = response.data.data;
+//     const questions = response.data.data;
 
-    if (questions.length > 0) {
-      res.status(200).json({
-        success: true,
-        message: "Questions Data Fetch Successfully ",
-        data: questions,
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        message: "Questions Data Not Found",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-};
+//     if (questions.length > 0) {
+//       res.status(200).json({
+//         success: true,
+//         message: "Questions Data Fetch Successfully ",
+//         data: questions,
+//       });
+//     } else {
+//       res.status(404).json({
+//         success: false,
+//         message: "Questions Data Not Found",
+//       });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Internal Server Error",
+//       error: error.message,
+//     });
+//   }
+// };

@@ -14,18 +14,18 @@ config();
 
 
 const googleClient = new OAuth2Client(process.env.CLIENTID);
-console.log(googleClient,"dta");
+// console.log(googleClient,"dta");
 
 exports.signupWithGoogle = async (req, res) => {
   try {
     const { idToken } = req.body;
-    console.log(req.body, "body");
+    // console.log(req.body, "body");
 
     const ticket = await googleClient.verifyIdToken({
       idToken,
       audience: process.env.CLIENTID,
     });
-    console.log(ticket, "ticket");
+    // console.log(ticket, "ticket");
 
     const { name, email } = ticket.getPayload();
 

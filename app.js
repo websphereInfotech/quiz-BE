@@ -25,7 +25,7 @@ app.use("/api/category", CategoriesRoutes);
 
 //Answer Routes
 const QuesationRoutes = require("./routes/question.routes");
-const Category = require("./models/category.model");
+// const Category = require("./models/category.model");
 app.use("/api/quesation", QuesationRoutes);
 
 app.get("/", (req, res) => res.send("Hello World!"));
